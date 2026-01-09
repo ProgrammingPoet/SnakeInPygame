@@ -23,8 +23,8 @@ while RENDERING:
         if event.type == pygame.QUIT:
             RENDERING = False
 
-    CLOCK.tick(30)#FPS lock and returns milliseconds it took for rendering
-    
+    print(CLOCK.tick(60))#FPS lock and returns milliseconds it took for rendering
+    print("FPS= ",1/(CLOCK.tick(60)/1000))#displays FPS
     pygame.display.update()#rendering the final image
 
 
