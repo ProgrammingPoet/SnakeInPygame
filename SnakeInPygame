@@ -1,17 +1,31 @@
 import pygame
 pygame.init()#initialiation
 WINDOW = pygame.display.set_mode((640,640))#window resolution
+SNAKE=[[1,1],[1,10],[1,20]]#snake segments
+CLOCK = pygame.time.Clock()#initialising fps functionalilty
 
 
 #game loop
 RENDERING = True
 while RENDERING:
     #cycling through events
-    for event in pygame.event.get():
+
+
+    for SEGMENT in SNAKE:#snake loading and drawing
+        SNAKE_SEGMENTS = pygame.Rect(SEGMENT[0], SEGMENT[1], 10, 10)#snake segments stored as 10x10 rectangles
+        pygame.draw.rect(WINDOW, (0, 255, 0),SNAKE_SEGMENTS)#displays the rectangle SNAKE on WINDOW with RGB values assigned
+
+
+
+
+    for event in pygame.event.get():#checks for inputs
         #quit from x button functionality
         if event.type == pygame.QUIT:
             RENDERING = False
+
+    CLOCK.tick(30)#FPS lock and returns milliseconds it took for rendering
     
+    pygame.display.update()#rendering the final image
 
 
     
