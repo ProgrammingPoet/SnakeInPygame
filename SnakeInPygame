@@ -7,6 +7,7 @@ SNAKE=[[0,0],[0,9],[0,19]]#snake segments
 HEADOFSNAKE=[]#initialising snake's first segment
 DIRECTION=(0,0)#initialising next movement
 APPLECOORDINATES= [random.randint(0, 63) * 10, random.randint(0, 63) * 10]#setting up initial apple co-ordinates
+SCORE=0
 CLOCK = pygame.time.Clock()#initialising fps functionalilty
 
 
@@ -42,11 +43,11 @@ while RENDERING:
     
     if HEADOFSNAKE[0]==APPLECOORDINATES[0] and HEADOFSNAKE[1]==APPLECOORDINATES[1]:#collision detection with apple
         APPLECOORDINATES= [random.randint(0, 63) * 10, random.randint(0, 63) * 10]#setting up next random apple co-ordinates
+        SCORE=SCORE+1
+    else:
+        SNAKE.pop()
 
-    print("Apple Co-Ordinates= ",APPLECOORDINATES[0], APPLECOORDINATES[1])
-
-    if HEADOFSNAKE[0]!=APPLECOORDINATES[0]:#check if x&y of apple match with head of snake
-        SNAKE.pop()#remove last entry in SNAKE list (tail)
+ 
 
     APPLE=pygame.Rect(APPLECOORDINATES[0], APPLECOORDINATES[1], 10, 10)
     pygame.draw.rect(WINDOW, (255, 0, 0),APPLE)
@@ -56,10 +57,9 @@ while RENDERING:
         pygame.draw.rect(WINDOW, (0, 255, 0),SNAKE_SEGMENTS)#displays the rectangle SNAKE on WINDOW with RGB values assigned
 
 
-
-    CLOCK.tick(60)
-    print(CLOCK.tick(60))#FPS lock and returns milliseconds it took for rendering
-    print("FPS= ",1/(CLOCK.tick(60)/1000))#displays FPS
+    FRAMETIME=CLOCK.tick(20)#FPS lock
+    print("FPS= ",1/(FRAMETIME/1000))#displays FPS
+    print("Score= ",SCORE)
     pygame.display.update()#rendering the final image
 
 
