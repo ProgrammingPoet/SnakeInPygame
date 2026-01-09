@@ -9,6 +9,8 @@ DIRECTION=(0,0)#initialising next movement
 APPLECOORDINATES= [random.randint(0, 63) * 10, random.randint(0, 63) * 10]#setting up initial apple co-ordinates
 FONT = pygame.font.SysFont(None, 36)
 SCORE=0
+XAXISBOUNDARY=[i for i in range(0,640,10)]#create x axis boundary
+YAXISBOUNDARY=[i for i in range(0,640,10)]#creat y axis boundary
 CLOCK = pygame.time.Clock()#initialising fps functionalilty
 
 
@@ -43,7 +45,7 @@ while RENDERING:
 
     
     if HEADOFSNAKE[0]==APPLECOORDINATES[0] and HEADOFSNAKE[1]==APPLECOORDINATES[1]:#collision detection with apple
-        APPLECOORDINATES= [random.randint(0, 63) * 10, random.randint(0, 63) * 10]#setting up next random apple co-ordinates
+        APPLECOORDINATES= [random.randint(1, 62) * 10, random.randint(1, 62) * 10]#setting up next random apple co-ordinates
         SCORE=SCORE+1
     else:
         SNAKE.pop()
@@ -52,7 +54,24 @@ while RENDERING:
 
     APPLE=pygame.Rect(APPLECOORDINATES[0], APPLECOORDINATES[1], 10, 10)#apple loading and drawing
     pygame.draw.rect(WINDOW, (255, 0, 0),APPLE)#apple rendering
-    
+
+
+
+    #boundary drawing
+    for i in range(0,64,1):
+        BOUNDARY=pygame.Rect(XAXISBOUNDARY[0], YAXISBOUNDARY[i], 10, 10)#left vertical boundary loading and drawing
+        pygame.draw.rect(WINDOW, (0, 0, 255),BOUNDARY)#left vertical boundary rendering
+    for i in range(0,64,1):
+        BOUNDARY=pygame.Rect(XAXISBOUNDARY[63], YAXISBOUNDARY[i], 10, 10)#right vertical boundary loading and drawing
+        pygame.draw.rect(WINDOW, (0, 0, 255),BOUNDARY)#right vertical boundary rendering
+    for i in range(0,64,1):
+        BOUNDARY=pygame.Rect(XAXISBOUNDARY[i], YAXISBOUNDARY[0], 10, 10)#left vertical boundary loading and drawing
+        pygame.draw.rect(WINDOW, (0, 0, 255),BOUNDARY)#left vertical boundary rendering
+    for i in range(0,64,1):
+        BOUNDARY=pygame.Rect(XAXISBOUNDARY[i], YAXISBOUNDARY[63], 10, 10)#left vertical boundary loading and drawing
+        pygame.draw.rect(WINDOW, (0, 0, 255),BOUNDARY)#left vertical boundary rendering
+        
+ 
     for SEGMENT in SNAKE:#snake loading and drawing
         SNAKE_SEGMENTS = pygame.Rect(SEGMENT[0], SEGMENT[1], 10, 10)#snake segments stored as 10x10 rectangles
         pygame.draw.rect(WINDOW, (0, 255, 0),SNAKE_SEGMENTS)#displays the rectangle SNAKE on WINDOW with RGB values assigned
