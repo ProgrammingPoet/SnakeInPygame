@@ -35,7 +35,6 @@ while RENDERING:
     #snake movement
     HEADOFSNAKE=[SNAKE[0][0]+DIRECTION[0],SNAKE[0][1]+DIRECTION[1]]
     SNAKE.insert(0,HEADOFSNAKE) #add new head of snake
-    SNAKE.pop()#remove last entry in SNAKE list (tail)
 
 
     for SEGMENT in SNAKE:#snake loading and drawing
