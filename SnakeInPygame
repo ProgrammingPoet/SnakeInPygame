@@ -7,6 +7,7 @@ SNAKE=[[0,0],[0,9],[0,19]]#snake segments
 HEADOFSNAKE=[]#initialising snake's first segment
 DIRECTION=(0,0)#initialising next movement
 APPLECOORDINATES= [random.randint(0, 63) * 10, random.randint(0, 63) * 10]#setting up initial apple co-ordinates
+FONT = pygame.font.SysFont(None, 36)
 SCORE=0
 CLOCK = pygame.time.Clock()#initialising fps functionalilty
 
@@ -57,9 +58,10 @@ while RENDERING:
         pygame.draw.rect(WINDOW, (0, 255, 0),SNAKE_SEGMENTS)#displays the rectangle SNAKE on WINDOW with RGB values assigned
 
 
+    SCOREBOARD= FONT.render(str(SCORE), True, (255, 255, 255))#scoreboard loading
+    WINDOW.blit(SCOREBOARD, (10, 10))#scoreboard drawing
     FRAMETIME=CLOCK.tick(20)#FPS lock
     print("FPS= ",1/(FRAMETIME/1000))#displays FPS
-    print("Score= ",SCORE)
     pygame.display.update()#rendering the final image
 
 
