@@ -50,6 +50,11 @@ while RENDERING:
     else:
         SNAKE.pop()
 
+
+    while APPLECOORDINATES in SNAKE:#apple does not spawn on snake
+        APPLECOORDINATES = [random.randint(1, 62) * 10, random.randint(1, 62) * 10]
+
+
  
 
     APPLE=pygame.Rect(APPLECOORDINATES[0], APPLECOORDINATES[1], 10, 10)#apple loading and drawing
@@ -64,6 +69,14 @@ while RENDERING:
         HEADOFSNAKE=[]
         DIRECTION=(0,0)
         SCORE=0
+
+    # self collision detection
+    if HEADOFSNAKE in SNAKE[1:]:
+        SNAKE = [[10, 10], [10, 20], [10, 30]]
+        HEADOFSNAKE = []
+        DIRECTION = (0, 0)
+        SCORE = 0
+
         
 
 
@@ -88,6 +101,9 @@ while RENDERING:
     for SEGMENT in SNAKE:#snake loading and drawing
         SNAKE_SEGMENTS = pygame.Rect(SEGMENT[0], SEGMENT[1], 10, 10)#snake segments stored as 10x10 rectangles
         pygame.draw.rect(WINDOW, (0, 255, 0),SNAKE_SEGMENTS)#displays the rectangle SNAKE on WINDOW with RGB values assigned
+
+
+    
 
 
     SCOREBOARD= FONT.render(str(SCORE), True, (255, 255, 255))#scoreboard loading and drawing
