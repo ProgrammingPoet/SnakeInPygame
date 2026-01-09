@@ -1,7 +1,6 @@
 import pygame
 import random
 pygame.init()#initialiation
-pygame.display.set_caption("Classic Snake In Python")#sets window title
 WINDOW = pygame.display.set_mode((640,640))#window resolution
 SNAKE=[[10,10],[10,20],[10,30]]#snake segments
 HEADOFSNAKE=[]#initialising snake's first segment
@@ -19,7 +18,13 @@ while RENDERING:
     #cycling through events
 
 
+
     WINDOW.fill((0, 0, 0))#refreshes the screen black
+
+    if SCORE != 0:
+        pygame.display.set_caption(str(SCORE))#sets window title
+    else:
+        pygame.display.set_caption("SCORE WILL BE DISPLAYED HERE")#sets window title
     
 
     for event in pygame.event.get():#checks for inputs
@@ -109,8 +114,7 @@ while RENDERING:
     
 
 
-    SCOREBOARD= FONT.render(str(SCORE), True, (255, 255, 255))#scoreboard loading and drawing
-    WINDOW.blit(SCOREBOARD, (10, 10))#scoreboard rendering
+    
     FRAMETIME=CLOCK.tick(20)#FPS lock
     print("FPS= ",1/(FRAMETIME/1000))#displays FPS
     pygame.display.update()#rendering the final image
