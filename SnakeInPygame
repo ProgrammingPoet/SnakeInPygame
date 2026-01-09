@@ -1,10 +1,12 @@
 import pygame
+import random
 pygame.init()#initialiation
 pygame.display.set_caption("Classic Snake In Python")#sets window title
 WINDOW = pygame.display.set_mode((640,640))#window resolution
-SNAKE=[[1,1],[1,10],[1,20]]#snake segments
+SNAKE=[[0,0],[0,9],[0,19]]#snake segments
 HEADOFSNAKE=[]#initialising snake's first segment
 DIRECTION=(0,0)#initialising next movement
+APPLECOORDINATES= [random.randint(0, 63) * 10, random.randint(0, 63) * 10]#setting up initial apple co-ordinates
 CLOCK = pygame.time.Clock()#initialising fps functionalilty
 
 
@@ -16,13 +18,14 @@ while RENDERING:
 
 
     WINDOW.fill((0, 0, 0))#refreshes the screen black
+    
 
     for event in pygame.event.get():#checks for inputs
         #quit from x button functionality
         if event.type == pygame.QUIT:
             RENDERING = False
         elif event.type == pygame.KEYDOWN:#checks for movement keys
-            #checks that input is not in opposite direction to current movement and updates direction accordingly
+            #snake movement & checks that input is not in opposite direction to current movement and updates direction accordingly
             if event.key == pygame.K_UP and DIRECTION != (0,10):
                 DIRECTION = (0, -10)
             elif event.key == pygame.K_DOWN and DIRECTION != (0,-10):
@@ -36,7 +39,18 @@ while RENDERING:
     HEADOFSNAKE=[SNAKE[0][0]+DIRECTION[0],SNAKE[0][1]+DIRECTION[1]]
     SNAKE.insert(0,HEADOFSNAKE) #add new head of snake
 
+    
+    if HEADOFSNAKE[0]==APPLECOORDINATES[0] and HEADOFSNAKE[1]==APPLECOORDINATES[1]:#collision detection with apple
+        APPLECOORDINATES= [random.randint(0, 63) * 10, random.randint(0, 63) * 10]#setting up next random apple co-ordinates
 
+    print("Apple Co-Ordinates= ",APPLECOORDINATES[0], APPLECOORDINATES[1])
+
+    if HEADOFSNAKE[0]!=APPLECOORDINATES[0]:#check if x&y of apple match with head of snake
+        SNAKE.pop()#remove last entry in SNAKE list (tail)
+
+    APPLE=pygame.Rect(APPLECOORDINATES[0], APPLECOORDINATES[1], 10, 10)
+    pygame.draw.rect(WINDOW, (255, 0, 0),APPLE)
+    
     for SEGMENT in SNAKE:#snake loading and drawing
         SNAKE_SEGMENTS = pygame.Rect(SEGMENT[0], SEGMENT[1], 10, 10)#snake segments stored as 10x10 rectangles
         pygame.draw.rect(WINDOW, (0, 255, 0),SNAKE_SEGMENTS)#displays the rectangle SNAKE on WINDOW with RGB values assigned
