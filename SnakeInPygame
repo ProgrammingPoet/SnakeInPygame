@@ -13,8 +13,6 @@ XAXISBOUNDARY=[i for i in range(0,640,10)]#create x axis boundary
 YAXISBOUNDARY=[i for i in range(0,640,10)]#creat y axis boundary
 CLOCK = pygame.time.Clock()#initialising fps functionalilty
 
-
-
 #game loop
 RENDERING = True
 while RENDERING:
@@ -69,6 +67,7 @@ while RENDERING:
         HEADOFSNAKE=[]
         DIRECTION=(0,0)
         SCORE=0
+        
 
     # self collision detection
     if HEADOFSNAKE in SNAKE[1:]:
@@ -76,6 +75,10 @@ while RENDERING:
         HEADOFSNAKE = []
         DIRECTION = (0, 0)
         SCORE = 0
+
+    if DIRECTION==(0,0):
+        PRESSRIGHT= FONT.render("Press RIGHT To Start", True, (255, 255, 255))#press right to start loading and drawing
+        WINDOW.blit(PRESSRIGHT, (200, 10))#press right to start renderin
 
         
 
