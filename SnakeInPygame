@@ -50,16 +50,16 @@ while RENDERING:
 
  
 
-    APPLE=pygame.Rect(APPLECOORDINATES[0], APPLECOORDINATES[1], 10, 10)
-    pygame.draw.rect(WINDOW, (255, 0, 0),APPLE)
+    APPLE=pygame.Rect(APPLECOORDINATES[0], APPLECOORDINATES[1], 10, 10)#apple loading and drawing
+    pygame.draw.rect(WINDOW, (255, 0, 0),APPLE)#apple rendering
     
     for SEGMENT in SNAKE:#snake loading and drawing
         SNAKE_SEGMENTS = pygame.Rect(SEGMENT[0], SEGMENT[1], 10, 10)#snake segments stored as 10x10 rectangles
         pygame.draw.rect(WINDOW, (0, 255, 0),SNAKE_SEGMENTS)#displays the rectangle SNAKE on WINDOW with RGB values assigned
 
 
-    SCOREBOARD= FONT.render(str(SCORE), True, (255, 255, 255))#scoreboard loading
-    WINDOW.blit(SCOREBOARD, (10, 10))#scoreboard drawing
+    SCOREBOARD= FONT.render(str(SCORE), True, (255, 255, 255))#scoreboard loading and drawing
+    WINDOW.blit(SCOREBOARD, (10, 10))#scoreboard rendering
     FRAMETIME=CLOCK.tick(20)#FPS lock
     print("FPS= ",1/(FRAMETIME/1000))#displays FPS
     pygame.display.update()#rendering the final image
